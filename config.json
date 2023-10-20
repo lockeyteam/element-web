@@ -1,0 +1,43 @@
+{
+    "default_server_name": "lockey.icu",
+    "brand": "LOCKEY-matrix",
+    "integrations_ui_url": "https://scalar.vector.im/",
+    "integrations_rest_url": "https://scalar.vector.im/api",
+    "integrations_widgets_urls": [
+        "https://scalar.vector.im/_matrix/integrations/v1",
+        "https://scalar.vector.im/api",
+        "https://scalar-staging.vector.im/_matrix/integrations/v1",
+        "https://scalar-staging.vector.im/api",
+        "https://scalar-staging.riot.im/scalar/api"
+    ],
+    "bug_report_endpoint_url": "https://lockey.icu/bugreports/submit",
+    "uisi_autorageshake_app": "element-auto-uisi",
+    "showLabsSettings": false,
+    "roomDirectory": {
+        "servers": ["lockey.icu", "matrix.org", "libera.chat"]
+    },
+    "enable_presence_by_hs_url": {
+        "https://lockey.icu": false
+    },
+    "terms_and_conditions_links": [
+        {
+            "url": "https://lockey.icu/privacy",
+            "text": "Privacy Policy"
+        },
+        {
+            "url": "https://lockey.icu/cookie-policy",
+            "text": "Cookie Policy"
+        }
+    ],
+    "posthog": {
+        "projectApiKey": "phc_Jzsm6DTm6V2705zeU5dcNvQDlonOR68XvX2sh1sEOHO",
+        "apiHost": "https://posthog.matrix.org"
+    },    
+        "setting_defaults": {
+            "MessageComposerInput.showStickersButton": false,
+            "MessageComposerInput.showPollsButton": false,
+            "language": "zh-hans"
+        },
+    "privacy_policy_url": "https://lockey.icu/cookie-policy",
+    "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx"
+}
