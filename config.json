@@ -19,6 +19,18 @@
     "enable_presence_by_hs_url": {
         "https://lkt.icu": false
     },
+    "features": {
+        "feature_report_to_moderators": true,
+        "feature_latex_maths": true,
+        "feature_pinning": true,
+        "feature_jump_to_date": true,
+        "feature_custom_themes": true,
+        "feature_dehydration": true,
+        "feature_location_share_live": true,
+        "feature_video_rooms": true,
+        "feature_room_subscriptions": true,
+        "feature_html_topic": true
+    },
     "terms_and_conditions_links": [
         {
             "url": "https://lkt.icu/privacy",

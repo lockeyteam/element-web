@@ -1,0 +1,61 @@
+name: Update Element
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:                
+  contents: write           
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Get latest release info
+        id: latest_release
+        run: |
+          release_info=$(curl -s https://api.github.com/repos/element-hq/element-web/releases/latest)
+          echo "::set-output name=download_url::$(echo "$release_info" | jq -r '.assets[0].browser_download_url')"
+          echo "::set-output name=version::$(echo "$release_info" | jq -r '.name')"
+
+      - name: Check if update is needed
+        run: |
+          if [[ -z "$(git tag)" || "${{ steps.latest_release.outputs.version }}" > "$(git describe --tags --abbrev=0)" ]]; then
+            echo "Update needed"
+          else
+            echo "No update needed"
+            exit 0
+          fi
+        shell: bash
+
+      - name: Download and extract latest release
+        run: |
+          curl -L -o element-latest.tar.gz "${{ steps.latest_release.outputs.download_url }}"
+          tar -xzf element-latest.tar.gz
+          rm element-latest.tar.gz
+        shell: bash
+
+      - name: Replace old files with new ones
+        run: |
+          shopt -s extglob
+          rm -rf !(element-v*|.git|.github|config.json)
+          mv element-v* temp
+          mv temp/* .
+          rm -rf temp
+        shell: bash
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update to ${{ steps.latest_release.outputs.version }}"
+          git tag "${{ steps.latest_release.outputs.version }}"
+          git push --follow-tags
+        shell: bash
