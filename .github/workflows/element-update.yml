@@ -55,6 +55,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "Update to ${{ steps.latest_release.outputs.version }}"
           git tag "${{ steps.latest_release.outputs.version }}"
           git push --follow-tags
