@@ -21,8 +21,8 @@ jobs:
         id: latest_release
         run: |
           release_info=$(curl -s https://api.github.com/repos/element-hq/element-web/releases/latest)
-          echo "::set-output name=download_url::$(echo "$release_info" | jq -r '.assets[0].browser_download_url')"
-          echo "::set-output name=version::$(echo "$release_info" | jq -r '.name')"
+          echo "download_url=$(echo "$release_info" | jq -r '.assets[0].browser_download_url')" >> $GITHUB_OUTPUT
+          echo "version=$(echo "$release_info" | jq -r '.name')" >> $GITHUB_OUTPUT
 
       - name: Check if update is needed
         run: |
